@@ -1,10 +1,13 @@
 import { HeaderContainer } from "./styles";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { CartContext } from "../../Providers/cart/cart";
+import { useContext } from "react";
 
 function Header({ isCart = false }) {
   const history = useHistory();
-  const cart = useSelector((state) => state.cart);
+  //const cart = useSelector((state) => state.cart);
+  const { cart } = useContext(CartContext);
 
   return (
     <HeaderContainer>

@@ -7,20 +7,18 @@ import {
   TotalContainer,
 } from "./styles";
 import Header from "../../components/Header";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { empty, remove } from "../../store/modules/cart/actions";
+import { CartContext } from "../../Providers/cart/cart";
+import { useContext } from "react";
 function Cart() {
-  const shoppingList = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const { cart, removeFromCart, emptyCart } = useContext(CartContext);
 
   return (
     <Container>
       <Header isCart={true} />
       <ShoppingListContainer>
         <ShoppingList>
-          {shoppingList.length === 0 && <h2>Carrinho vázio </h2>}
-          {shoppingList.map((prod, idx) => (
+          {cart.length === 0 && <h2>Carrinho vázio </h2>}
+          {cart.map((prod, idx) => (
             <ShoppingCard key={idx}>
               <div className="shoppingAux">
                 <img src={prod.image} alt={prod.name} />
@@ -28,7 +26,7 @@ function Cart() {
               </div>
               <div className="shoppingAux">
                 <span>R${prod.price.toFixed(2)} </span>
-                <button onClick={() => dispatch(remove(prod))}>x</button>
+                <button onClick={() => removeFromCart(prod)}>x</button>
               </div>
             </ShoppingCard>
           ))}
@@ -37,15 +35,13 @@ function Cart() {
         <TotalContainer>
           <h4>Resumo do pedido</h4>
           <AuxTotalContainer>
-            <span className="prodN">{shoppingList.length} Produtos</span>
+            <span className="prodN">{cart.length} Produtos</span>
             <span className="prodAmt">
               R$
-              {shoppingList
-                .reduce((acc, prod) => acc + prod.price, 0)
-                .toFixed(2)}
+              {cart.reduce((acc, prod) => acc + prod.price, 0).toFixed(2)}
             </span>
           </AuxTotalContainer>
-          <button onClick={() => dispatch(empty())}>FINALIZAR O PEDIDO</button>
+          <button onClick={() => emptyCart()}>FINALIZAR O PEDIDO</button>
         </TotalContainer>
       </ShoppingListContainer>
     </Container>
