@@ -46,14 +46,14 @@ export const AuxTotalContainer = styled.div`
 
 export const ShoppingListContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const ShoppingList = styled.div`
   margin: 10px 0 0 10px;
   background-color: #fff;
   width: 950px;
-  min-height: 100vh;
+  min-height: 89vh;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
