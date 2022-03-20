@@ -25,6 +25,7 @@ export const TotalContainer = styled.div`
     cursor: pointer;
     :hover {
       background-color: slateblue;
+      transition: 0.4s;
     }
   }
 `;
